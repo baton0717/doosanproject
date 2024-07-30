@@ -1,0 +1,115 @@
+[LLM 아키텍처 설계 Checklist]
+1. 사용자 화면
+그룹 공통 Chat UI
+기본 채팅 기능 구현
+사용자 프로필 표시 기능 구현
+최근 대화 기록 기능 구현
+알림 기능 구현
+React, Vue.js, Recoil 사용 여부 확인
+업무 기능별 Chat UI
+R&D
+기술 문서 검색 기능 구현
+연구 보고서 요약 기능 구현
+특허 검색 기능 구현
+React, Vue.js 사용 여부 확인
+Node.js, Express 사용 여부 확인
+PostgreSQL 사용 여부 확인
+Elasticsearch, Apache Solr 사용 여부 확인
+SpaCy, BERT, Hugging Face Transformers 사용 여부 확인
+영업
+고객 관리 기능 구현
+판매 보고서 생성 기능 구현
+제품 정보 제공 기능 구현
+React, Vue.js 사용 여부 확인
+Node.js, Express 사용 여부 확인
+PostgreSQL 사용 여부 확인
+Custom CRM API 사용 여부 확인
+D3.js, Chart.js 사용 여부 확인
+구매
+공급업체 정보 제공 기능 구현
+주문 상태 추적 기능 구현
+재고 관리 기능 구현
+React, Vue.js 사용 여부 확인
+Node.js, Express 사용 여부 확인
+PostgreSQL 사용 여부 확인
+Custom ERP API 사용 여부 확인
+Redis, Apache Kafka 사용 여부 확인
+재무
+재무 보고서 생성 기능 구현
+예산 추적 기능 구현
+비용 분석 기능 구현
+React, Vue.js 사용 여부 확인
+Node.js, Express 사용 여부 확인
+PostgreSQL 사용 여부 확인
+Custom Finance API 사용 여부 확인
+Pandas, NumPy 사용 여부 확인
+분류, 요약, 번역
+문서 분류 기능 구현
+요약 생성 기능 구현
+실시간 번역 기능 구현
+React, Vue.js 사용 여부 확인
+Node.js, Express 사용 여부 확인
+BERT, RoBERTa, T5, MarianMT 사용 여부 확인
+PostgreSQL 사용 여부 확인
+MarianMT 사용 여부 확인
+2. 질의 분석
+질의 언어 식별
+FastText, langid.py 사용 여부 확인
+구조 분석
+SyntaxNet, SpaCy 사용 여부 확인
+의미 분석
+BERT, RoBERTa, ALBERT 사용 여부 확인
+질의 구체화
+BERT, RoBERTa, ALBERT 사용 여부 확인
+개인화
+사용자 프로필 데이터베이스 구현 (PostgreSQL, MongoDB)
+세션 관리 시스템 구현 (Redis)
+사용자 인식 및 관리 시스템 구현 (Keycloak, Auth0)
+사용자 행동 추적 및 분석 시스템 구현 (Elasticsearch, Kibana)
+추천 시스템 구현 (TensorFlow, PyTorch)
+3. Vector DB 외 Storage
+Vector DB(필드 메타)
+Milvus 사용 여부 확인
+Vector DB(RAG)
+FAISS 사용 여부 확인
+질의문 DB
+PostgreSQL, MongoDB 사용 여부 확인
+참고문서(Doc)
+Elasticsearch 사용 여부 확인
+질의 Log DB
+ELK Stack (Elasticsearch, Logstash, Kibana) 사용 여부 확인
+응답 Log DB
+ELK Stack 사용 여부 확인
+4. 결과 처리
+RAG 기반 답변
+Retrieval-Augmented Generation 모델 (BERT + GPT), RAG-Token
+사용 여부 확인
+응답 생성
+BERT, RoBERTa, ALBERT 사용 여부 확인
+응답 검증(AI Filter)
+Rule-based 필터 사용 여부 확인
+추가 검증 모델 (e.g., BERT, RoBERTa) 사용 여부 확인
+5. LLM 모델
+하이퍼클로바 사용 여부 확인
+Gemini 사용 여부 확인
+Llama3 사용 여부 확인
+Mistral 사용 여부 확인
+Claude 2 (Anthropic) 사용 여부 확인
+Meta의 최신 LLaMA 시리즈 모델 사용 여부 확인
+Falcon 사용 여부 확인
+6. 관리도구
+LLM Version 관리
+Git, Model Registry (e.g., MLflow) 사용 여부 확인
+학습 Data 관리
+데이터 레이크 (e.g., Delta Lake) 사용 여부 확인
+Apache Hudi 사용 여부 확인
+질의/답변 Log
+ELK Stack 사용 여부 확인
+BigQuery 사용 여부 확인
+Datadog 사용 여부 확인
+사용자 Feedback
+피드백 수집 도구 구현 (Typeform)
+분석 및 반영 시스템 구현 (대시보드)
+Prompting Template
+프롬프트 템플릿 저장 및 관리 시스템 구현 (YAML/JSON 형식 파일)
+Prefect 사용 여부 확인

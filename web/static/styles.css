@@ -1,0 +1,136 @@
+body {
+    background-color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+nav {
+    background-color: #0861B5;
+    padding: 1em;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+nav .logo {
+    display: flex;
+    align-items: center;
+}
+
+nav .menu {
+    display: flex;
+    gap: 1em;
+    padding-right: 2em; /* 우측 padding 추가 */
+}
+
+nav .menu a {
+    color: white;
+    text-decoration: none;
+}
+
+.container {
+    display: flex;
+    flex-grow: 1;
+    margin-top: 60px; /* nav height */
+}
+
+.sidebar {
+    background-color: #DEEBF7;
+    width: 200px;
+    padding: 4em 2em 2em 2em;  /* 모든 방향에 패딩 추가 */
+    height: calc(100vh - 60px); /* 전체 화면 높이에서 nav height를 뺀 값 */
+    position: fixed;
+    top: 60px;  /* nav height */
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.main-content {
+    margin-left: 220px; /* 사이드바의 폭 + 여유 공간 추가 */
+    padding: 4em;  /* 모든 방향에 4em 패딩 추가 */
+    flex-grow: 1;
+    width: calc(100% - 220px); /* 사이드바 넓이 만큼 뺀 값 */
+}
+
+.centered-content {
+    margin: 0 auto;
+    padding: 4em 2em;  /* 모든 방향에 4em 패딩 추가 */
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* 상단에 위치하게 조정 */
+    align-items: center;
+    margin-top: 60px; /* nav height만큼 margin 추가 */
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.checklist {
+    width: 45%;
+}
+
+.ocr-result {
+    width: 45%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+button {
+    background-color: #0861B5;
+    color: white;
+    border: none;
+    padding: 0.5em 2em; /* padding 조정 */
+    cursor: pointer;
+}
+
+.result.pass {
+    color: green;
+    font-weight: bold;
+}
+
+.result.fail {
+    color: red;
+    font-weight: bold;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f44336;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+}

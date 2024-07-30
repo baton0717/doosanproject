@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doosan Web App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='doosan2.png') }}" alt="Doosan Logo" height="50">
+            </a>
+        </div>
+        <div class="menu">
+            {% if 'user' in session %}
+                <span>Welcome, {{ session['user'] }}</span>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('register') }}">회원가입</a>
+                <a href="{{ url_for('login') }}">로그인</a>
+            {% endif %}
+        </div>
+    </nav>
+    <div class="container">
+        {% if request.endpoint not in ['register', 'login'] %}
+        <div class="sidebar">
+            <a href="{{ url_for('index') }}">메인 페이지</a>
+            <a href="{{ url_for('notices') }}">공지사항</a>
+            <a href="{{ url_for('task', task_id=1) }}">과제1</a>
+            <a href="{{ url_for('task2') }}">과제2</a> <!-- 변경된 부분 -->
+            <a href="{{ url_for('task', task_id=3) }}">과제3</a>
+            <a href="{{ url_for('task', task_id=4) }}">과제4</a>
+            <a href="{{ url_for('task', task_id=5) }}">과제5</a>
+        </div>
+        {% endif %}
+        <div class="main-content {% if request.endpoint in ['register', 'login'] %}centered-content{% endif %}">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</body>
+</html>

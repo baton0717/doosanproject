@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>과제 2 - 파일 업로드 및 OCR</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.file.label }}<br>
+            {{ form.file() }}
+        </div>
+        <div>
+            {{ form.submit(class="btn") }}
+        </div>
+    </form>
+    <div class="content-wrapper">
+        <div class="checklist">
+            <table>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>내용</th>
+                        <th>검토 결과</th>
+                        <th>추천 문구</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in range(1, 36) %}
+                    <tr>
+                        <td>{{ i }}</td>
+                        <td>내용 {{ i }}</td>
+                        <td>
+                            {% if i % 2 == 0 %}
+                            <span class="result pass">PASS</span>
+                            {% else %}
+                            <span class="result fail">FAIL</span>
+                            {% endif %}
+                        </td>
+                        <td>추천 문구 {{ i }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="ocr-result">
+            {% if ocr_text %}
+                <h3>OCR 결과:</h3>
+                <pre>{{ ocr_text }}</pre>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
