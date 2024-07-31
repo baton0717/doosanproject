@@ -133,4 +133,33 @@ button {
     padding: 10px;
     border-radius: 5px;
     z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.5s ease-out; /* Fadeout 효과 추가 */
+}
+.popup.success {
+    background-color: #d4edda; /* 연한 초록색 */
+    color: black;
+}
+
+.form-horizontal {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1em;
+}
+
+.form-table {
+    width: 100%;
+}
+
+.form-table td {
+    padding: 1em;
+}
+
+input[type="text"],
+input[type="file"],
+button {
+    width: 100%;
+    padding: 0.5em;
+    box-sizing: border-box;
 }

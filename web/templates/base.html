@@ -10,39 +10,32 @@
     <nav>
         <div class="logo">
             <a href="{{ url_for('index') }}">
-                <img src="{{ url_for('static', filename='doosan2.png') }}" alt="Doosan Logo" height="50">
+                <img src="{{ url_for('static', filename='doosan2.png') }}" alt="Doosan Logo" style="height: 50px;">
             </a>
         </div>
         <div class="menu">
-            {% if 'user' in session %}
-                <span>Welcome, {{ session['user'] }}</span>
-                <a href="{{ url_for('logout') }}">Logout</a>
+            {% if 'user_id' in session %}
+            <a href="{{ url_for('logout') }}">Logout</a>
             {% else %}
-                <a href="{{ url_for('register') }}">회원가입</a>
-                <a href="{{ url_for('login') }}">로그인</a>
+            <a href="{{ url_for('register') }}">Register</a>
+            <a href="{{ url_for('login') }}">Login</a>
             {% endif %}
         </div>
     </nav>
     <div class="container">
-        {% if request.endpoint not in ['register', 'login'] %}
         <div class="sidebar">
-            <a href="{{ url_for('index') }}">메인 페이지</a>
             <a href="{{ url_for('notices') }}">공지사항</a>
-            <a href="{{ url_for('task', task_id=1) }}">과제1</a>
-            <a href="{{ url_for('task2') }}">과제2</a> <!-- 변경된 부분 -->
-            <a href="{{ url_for('task', task_id=3) }}">과제3</a>
-            <a href="{{ url_for('task', task_id=4) }}">과제4</a>
-            <a href="{{ url_for('task', task_id=5) }}">과제5</a>
+            <a href="{{ url_for('task2') }}">과제2</a>
+            <a href="{{ url_for('task2') }}">과제3</a> <!-- 이 부분도 필요에 따라 수정 -->
+            <a href="{{ url_for('task2') }}">과제4</a> <!-- 이 부분도 필요에 따라 수정 -->
+            <a href="{{ url_for('task2') }}">과제5</a> <!-- 이 부분도 필요에 따라 수정 -->
         </div>
-        {% endif %}
-        <div class="main-content {% if request.endpoint in ['register', 'login'] %}centered-content{% endif %}">
+        <div class="main-content">
             {% with messages = get_flashed_messages() %}
             {% if messages %}
-                <ul>
                 {% for message in messages %}
-                    <li>{{ message }}</li>
+                <div class="flash">{{ message }}</div>
                 {% endfor %}
-                </ul>
             {% endif %}
             {% endwith %}
             {% block content %}{% endblock %}

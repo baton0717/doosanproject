@@ -1,50 +1,85 @@
 {% extends "base.html" %}
 {% block content %}
-    <h2>과제 2 - 파일 업로드 및 OCR</h2>
-    <form method="POST" enctype="multipart/form-data">
+    <h2>[DDI] 표준계약서 Checklist 검토 솔루션 Ver0.1</h2>
+    <form method="POST" enctype="multipart/form-data" class="form-horizontal">
         {{ form.hidden_tag() }}
-        <div>
-            {{ form.file.label }}<br>
-            {{ form.file() }}
-        </div>
-        <div>
-            {{ form.submit(class="btn") }}
-        </div>
+        <table class="form-table">
+            <tr>
+                <td>
+                    {{ form.contract_name.label }}<br>
+                    {{ form.contract_name(size=32) }}
+                </td>
+                <td>
+                    {{ form.company_name.label }}<br>
+                    {{ form.company_name(size=32, id="company_name") }}
+                </td>
+                <td>
+                    {{ form.company_code.label }}<br>
+                    {{ form.company_code(size=32, id="company_code", readonly=True) }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{ form.contract_amount.label }}<br>
+                    {{ form.contract_amount(size=32) }}
+                </td>
+                <td>
+                    {{ form.contract_period.label }}<br>
+                    {{ form.contract_period(size=32) }}
+                </td>
+                <td>
+                    {{ form.contract_type.label }}<br>
+                    {{ form.contract_type(size=32) }}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    {{ form.file.label }}<br>
+                    {{ form.file() }}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align: right;">
+                    {{ form.submit(class="btn") }}
+                </td>
+            </tr>
+        </table>
     </form>
-    <div class="content-wrapper">
-        <div class="checklist">
-            <table>
-                <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>내용</th>
-                        <th>검토 결과</th>
-                        <th>추천 문구</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for i in range(1, 36) %}
-                    <tr>
-                        <td>{{ i }}</td>
-                        <td>내용 {{ i }}</td>
-                        <td>
-                            {% if i % 2 == 0 %}
-                            <span class="result pass">PASS</span>
-                            {% else %}
-                            <span class="result fail">FAIL</span>
-                            {% endif %}
-                        </td>
-                        <td>추천 문구 {{ i }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        <div class="ocr-result">
-            {% if ocr_text %}
-                <h3>OCR 결과:</h3>
-                <pre>{{ ocr_text }}</pre>
-            {% endif %}
-        </div>
-    </div>
+    <h3>업로드된 파일 목록</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>계약명</th>
+                <th>계약 업체명</th>
+                <th>계약 업체 코드</th>
+                <th>계약 금액</th>
+                <th>계약 기간</th>
+                <th>계약 종류</th>
+                <th>파일</th>
+                <th>작업</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td>{{ post.contract_name }}</td>
+                <td>{{ post.company_name }}</td>
+                <td>{{ post.company_code }}</td>
+                <td>{{ post.contract_amount }}</td>
+                <td>{{ post.contract_period }}</td>
+                <td>{{ post.contract_type }}</td>
+                <td>
+                    {% if post.filename %}
+                    <a href="{{ url_for('download_file', filename=post.filename) }}">{{ post.filename }}</a>
+                    {% else %}
+                    없음
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ url_for('task2_detail', post_id=post.id) }}">보기</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

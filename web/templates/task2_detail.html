@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.content }}</p>
+    <div class="content-wrapper">
+        <div class="checklist">
+            <h3>체크리스트 확인 현황</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>내용</th>
+                        <th>검토 결과</th>
+                        <th>추천 문구</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in range(1, 36) %}
+                    <tr>
+                        <td>{{ i }}</td>
+                        <td>체크리스트 항목 {{ i }}</td>
+                        <td class="result {{ 'pass' if i % 2 == 0 else 'fail' }}">{{ 'PASS' if i % 2 == 0 else 'FAIL' }}</td>
+                        <td>추천 문구 {{ i }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="ocr-result">
+            {% if ocr_text %}
+            <h3>OCR 결과</h3>
+            <pre>{{ ocr_text }}</pre>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

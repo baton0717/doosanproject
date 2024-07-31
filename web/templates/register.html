@@ -16,10 +16,74 @@
             {{ form.confirm(size=32) }}
         </div>
         <div>
-            {{ form.send_code(class="btn") }}
+            <button type="button" class="btn" onclick="sendCode()">인증번호 발송</button>
+        </div>
+        <div>
+            <label for="verification_code">인증번호</label><br>
+            <input type="text" id="verification_code" name="verification_code" size="32" />
         </div>
         <div>
             {{ form.submit(class="btn") }}
         </div>
     </form>
+    <div id="message" class="popup"></div>
+    <script>
+        function sendCode() {
+            showPopup('인증번호가 발송되었습니다.');
+        }
+
+        function showPopup(message, success = false) {
+            const popup = document.getElementById('message');
+            popup.textContent = message;
+            popup.style.display = 'block';
+            popup.style.opacity = 1;
+            popup.style.backgroundColor = success ? '#d4edda' : '#f44336';  // 연한 초록색과 빨간색
+            setTimeout(() => {
+                fadeOut(popup);
+                if (success) {
+                    setTimeout(() => {
+                        window.location.href = "{{ url_for('login') }}";  // 로그인 페이지로 이동
+                    }, 500);  // Fadeout 후 로그인 페이지로 이동
+                }
+            }, 3000);  // 메시지를 3초 동안 표시
+        }
+
+        function fadeOut(element) {
+            let opacity = 1;
+            const fade = setInterval(() => {
+                if (opacity <= 0) {
+                    clearInterval(fade);
+                    element.style.display = 'none';
+                }
+                element.style.opacity = opacity;
+                opacity -= 0.1;
+            }, 50);  // Fadeout 속도 조정
+        }
+
+        document.querySelector('form').addEventListener('submit', function(event) {
+            const email = document.querySelector('input[name="email"]').value;
+            const code = document.getElementById('verification_code').value;
+            if (!email.endsWith('@doosan.com')) {
+                event.preventDefault();
+                showPopup('두산 계정만 사용할 수 있습니다.');
+            } else if (code !== '123456') {
+                event.preventDefault();
+                showPopup('잘못된 인증번호입니다.');
+            } else {
+                event.preventDefault();  // Prevent form submission for demo purposes
+                showPopup('회원가입이 완료되었습니다.', true);
+                setTimeout(() => {
+                    event.target.submit();  // 실제로 폼을 제출
+                }, 3000);  // 메시지를 3초 동안 표시한 후 폼 제출
+            }
+        });
+
+        // Flash message display for form validation errors
+        document.addEventListener('DOMContentLoaded', function() {
+            const flashMessage = '{{ get_flashed_messages()|join(", ") }}';
+            if (flashMessage) {
+                showPopup(flashMessage);
+            }
+        });
+    </script>
 {% endblock %}
